@@ -1,0 +1,54 @@
+//
+//  UserCell.swift
+//  KnowBody
+//
+//  Created by James Swinehart on 7/31/25.
+//
+import SwiftUI
+
+struct UserCell: View {
+    let user: User
+    
+    var body: some View {
+        HStack {
+            CircularProfileImageView(user: user, size: .small)
+            
+            VStack(alignment: .leading) {
+                let first = user.firstname
+                let last = user.lastname
+                let title = user.title
+
+                Text("\(first) \(last), \(title)")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                
+                let specialties = user.selectedSpecialties.joined(separator: ", ")
+                let location = user.location
+
+                Text("\(specialties), \(location)")
+                    .font(.subheadline)
+            }
+            .font(.footnote)
+            
+            Spacer()
+            
+            Text("Follow")
+                .font(.subheadline)
+                .fontWeight(.semibold)
+                .frame(width: 100, height: 32)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color(.systemGray4), lineWidth: 1)
+                }
+        }
+        .padding(.horizontal)
+    }
+}
+
+struct UserCell_Previews: PreviewProvider {
+    static var previews: some View {
+        UserCell(user: dev.user)
+    }
+}
+
+
